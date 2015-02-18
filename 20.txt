@@ -1,0 +1,6 @@
+For the algorithm I used the pearson correlation function. 
+I chose this similarity function over the others because it is used very often. 
+The algorithm uses a very basic greedy algorithm that takes the two most correlated students and matches them together. 
+After they’re matched, the students are removed from the list and the algorithm reruns. 
+When there’s an odd number of students, I applied the standard educational practice to group the last three students. 
+The advantages of the approach that the greedy algorithm takes is that the biggest group of people are satisfied and roughly only the last three student are less satisfied.

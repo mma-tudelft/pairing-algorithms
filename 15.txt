@@ -1,0 +1,91 @@
+import csv
+import numpy as np
+
+with open('Sheet_1.csv', 'rb') as cvsfile:
+    reader = csv.reader(cvsfile, delimiter=',', quotechar = '\'')
+    header = reader.next()
+    identifiers = []
+    scores = {}
+    for row in reader:
+        # store the identifier and corresponding scores
+        identifiers.append(row[9])
+        identifier = row[9]
+        ratings = map(int, [x if x is not '' else '0' for x in row[10:]])
+        scores[identifier] = ratings
+
+
+def pearson_cor(a, b):
+    non_zero_a = np.nonzero(a)[0]
+    non_zero_b = np.nonzero(b)[0]
+    
+    indices = np.intersect1d(non_zero_a, non_zero_b)
+    ratings_a = [a[i] for i in indices]
+    ratings_b = [b[i] for i in indices]
+
+    if not ratings_a or not ratings_b:
+        return 0.0
+    
+    mean_a = np.mean([a[i] for i in non_zero_a])
+    mean_b = np.mean([b[i] for i in non_zero_b])
+    mean_ratings_a = [i - mean_a for i in ratings_a]
+    mean_ratings_b = [i - mean_b for i in ratings_b]
+
+    numer = np.sum(np.multiply(mean_ratings_a,mean_ratings_b))
+    denom = np.sqrt(np.sum(np.square(mean_ratings_a)))*np.sqrt(np.sum(np.square(mean_ratings_b)))
+    
+    if denom != 0.0:
+        return float(numer) / denom
+    else:
+        return 0.0
+        
+def distance_matrix():
+    result = []
+    N = len(scores)
+    for i in range(N):
+        for j in range(i+1,N):
+            ind = (i, j)
+            cor = pearson_cor(scores[identifiers[i]], scores[identifiers[j]])
+            result.append((ind, cor))
+    return result
+    
+D = distance_matrix()
+d_sorted = sorted(D, key=lambda D: D[1])
+    
+pairs = []
+free_participants = list(identifiers)
+
+while len(free_participants) > (len(free_participants) % 2):
+    match = d_sorted.pop()[0]
+    a = identifiers[match[0]]
+    b = identifiers[match[1]]
+    pairs.append((a, b))
+    
+    #indicate participants are now paired
+    free_participants.remove(a)
+    free_participants.remove(b)
+    
+     # remove the newly paired participants from the distance matrix
+    for i in range(len(d_sorted) - 1, -1, -1):
+        if match[0] in d_sorted[i][0] or match[1] in d_sorted[i][0]:
+            del d_sorted[i]
+            
+if free_participants:
+    index = identifiers.index(free_participants.pop())
+    cors = [(i, j) for (i, j) in D if i[0] is index or i[1] is index]
+       
+    match = max(cors, key=lambda x:x[1])
+    
+    if match[0][0] is not index:
+        index = match[0][1]
+        other = match[0][0]
+    else:
+        other = match[0][1]
+        
+    index = identifiers[index]
+    other = identifiers[other]
+        
+    pairs = [i if i[0] is not other and i[1] is not other else (i[0], i[1], index) for i in pairs]
+    
+
+for i in pairs:
+    print i

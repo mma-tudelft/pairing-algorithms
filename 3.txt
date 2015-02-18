@@ -1,0 +1,7 @@
+This algorithm uses the adjusted cosine similarity, since users might have a different personal rating scale, 
+while still having a similar movie taste. The mean-centering takes care of this. 
+The algorithm also still uses the 0 ratings, because people who don’t really watch movies could be 
+paired together this way, while they might be paired with others using Pearson.
+
+Since no one wants to be alone I decided to pair the last student to be picked in the uneven case with the group 
+containing the student with whom he or she has the highest similarity.

@@ -1,0 +1,7 @@
+ScoreMaster™ v4
+“My tastes are objectively gooder than yours” -edition
+
+With the incredible technology brought to you by ScoreMaster™, it is now possible to match students together based on their questionable taste in movies. You too, can have a match found, and see whose tastes are relatively the least terrible compared to yours. With the pairing algorithm magic* making use of nothing more than the adjusted cosine similarity between students, it is possible to find you all your best** matches, and deliver you the results in a convenient file called “output.txt” in the same directory as ScoreMaster™.
+
+*patent pending
+**please don’t sue us if we’re wrong
