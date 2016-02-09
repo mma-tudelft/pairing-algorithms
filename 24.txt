@@ -1,1 +1,0 @@
-The algorithm I made, is based on cosine similarity. It takes in account that some people haven’t voted for a lot of movies, and tries to match them based on that too. It does this by not filtering zero ratings. The pairs are outputted with a score. A lower score means less difference, or more similarity. The last user is omitted if the number of users is odd.

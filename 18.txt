@@ -1,5 +1,0 @@
-This algorithm calculates the adjusted cosine similarity between every possible pair. 
-After sorting the pairs on similarity, it iterates over the pairs and picks the pairs with the highest similarity in a greedy way. 
-In the instance that there is an odd amount of participants, this algorithm iterates over all the pairs in order of descending similarity and looks for a pair that contains the remaining participant. 
-Once this pair has been found, the last participant is added to the matched pair belonging to the other member of the found pair.
-This creates one trio in which the one member shares a relatively high similarity with the other two members and because of this it is likely that the other two members also have a relatively high similarity.

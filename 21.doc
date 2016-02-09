@@ -1,5 +1,0 @@
-Pitch:
-
-This algorithm uses the powerful Pearson correlation similarity for matching pairs. Popular sites like Netflix use this algorithm for recommending as well. Since the matrix of users and ratings is filled in with 0’s for non-rated items, Pearson correlation can be applied. This list is also big enough to fully demonstrate the dependability of the Pearson correlation calculation, because it can be a bit unreliable when used with a small amount of items (<5).
-    
-
